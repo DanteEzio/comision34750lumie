@@ -4,14 +4,14 @@ import AvatarJsx from './components/AvatarJsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div id="1" className="App">
+      {/* <header className="App-header "> */}
         <img src={logo} className="App-logo" alt="logo" />
         <AvatarJsx />
-        <h1>BIENVENIDOS</h1>
+        <p className="Titulo" style={{ backgroundColor: 'blue'}} onClick={() => console.log('click')}>BIENVENIDOS</p>
         <button>boton</button>
         <input />
-      </header>
+      {/* </header> */}
     </div>
   );
 }
