@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import Title from '../Title/Title'
 
-const Counter = () => {
+const Counter = ({ children, render }) => {
     const initial = 10
-    let [count, setCount] = useState(initial)
-
+    const [count, setCount] = useState(initial)
+    console.log(children)
     const decrement = () => {
         // accu = accu - 1
         if(count > 0) {
@@ -17,15 +18,18 @@ const Counter = () => {
     }
 
     const reset = () => {
-        setCount(initial)
+        setCount('hola')
     }
 
     return (
         <div>
+            <Title title="Esto es dentro de Counter" />
+            {children}
             <h1>{count}</h1>
             <button onClick={decrement}>Restar</button>
             <button onClick={increment}>Sumar</button>
             <button onClick={reset}>Reset</button>
+            {render}
         </div>
     )
 }
