@@ -1,13 +1,21 @@
+import './Navbar.css'
+import CartWidget from '../CartWidget/CartWidget'
+
 const Navbar = () => {
-    return (
-        <nav style={{ backgroundColor: 'red'}}>
-          <h1>Ecommerce</h1>
-          <div>
-            <button onClick={() => console.log('hola')}>Celulares</button>
-            <button>Tablets</button>
+
+  return (
+      <nav className="NavBar" >
+          <div className='NavBar'>
+            <h3>Ecommerce</h3>
           </div>
-        </nav>
-    )
+          <div className="Categories">
+              <button className="Option">Celular</button>
+              <button className="Option">Tablet</button>
+              <button className="Option">Notebook</button>
+          </div>
+          <CartWidget />
+      </nav>
+  )
 }
 
 export default Navbar
