@@ -1,56 +1,56 @@
+import './ItemListContainer.css'
 import { useState, useEffect } from 'react'
-import { getProducts } from '../../asyncMock'
+import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from '../ItemList/ItemList'
-import { useParams } from 'react-router-dom'
-import { getProductsByCategory } from '../../asyncMock'
+import { useParams } from 'react-router-dom' 
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
-    const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
 
     const { categoryId } = useParams()
-    console.log(categoryId)
+
+    // useEffect(() => {
+    //     const onResize = (e) => {
+    //         console.log(e)
+    //         console.log('cambio tamaño de ventana')
+    //     }
+    //     window.addEventListener('resize', onResize)
+
+        
+    //     return () => {
+    //         window.removeEventListener('resize', onResize)
+    //     }
+    // }, [])
+
 
     useEffect(() => {
-        if(!categoryId) {
-            getProducts().then(res => {
-                console.log(res)
-                setProducts(res)
-            }).catch(error => {
-                console.log(error)
-                setError(true)
-            }).finally(() => {
-                setLoading(false)
-            })
-        } else {
-            getProductsByCategory(categoryId).then(res => {
-                console.log(res)
-                setProducts(res)
-            }).catch(error => {
-                console.log(error)
-                setError(true)
-            }).finally(() => {
-                setLoading(false)
-            })
-        }
+        setLoading(true)
+        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        
+        asyncFunction(categoryId).then(response => {
+            setProducts(response)
+        }).catch(error => {
+            console.log(error)
+        }).finally(() => {
+            setLoading(false)
+        })  
     }, [categoryId])
 
-    // const productosTransformados = products.map(product => <li key={product.id}>{product.name}</li>)
-    if(loading) {
-        return <h1>Loading...</h1>
-    }
-    
 
-    if(error) {
-        return <h1>Hubo un error</h1>
-    }
+    // if(loading) {
+    //     return <h1>Cargando productos...</h1>
+    // }
 
+    // if(products.length === 0) {
+    //     return categoryId ? <h1>No hay productos en nuestra categoria {categoryId}</h1> : <h1>No hay productos disponibles</h1>
+    // }
 
     return (
-        <div className="ItemListContainer">
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
+        <div onClick={() => console.log('click en itemlistcontainer')}>
+            <h1>{`${greeting} ${categoryId || ''}`}</h1>
+            {/* <button onClick={(e) => console.log(e)}>boton</button> */}
+            <ItemList products={products} />
         </div>
     )
 }
