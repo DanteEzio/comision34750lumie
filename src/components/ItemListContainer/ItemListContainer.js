@@ -10,20 +10,6 @@ const ItemListContainer = ({ greeting }) => {
 
     const { categoryId } = useParams()
 
-    // useEffect(() => {
-    //     const onResize = (e) => {
-    //         console.log(e)
-    //         console.log('cambio tamaño de ventana')
-    //     }
-    //     window.addEventListener('resize', onResize)
-
-        
-    //     return () => {
-    //         window.removeEventListener('resize', onResize)
-    //     }
-    // }, [])
-
-
     useEffect(() => {
         setLoading(true)
         const asyncFunction = categoryId ? getProductsByCategory : getProducts
